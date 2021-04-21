@@ -1,10 +1,17 @@
 import scrapy 
+from scrapy_splash import SplashRequest
 
 
 class AlibabaScraper(scrapy.Spider):
     name = 'alibaba'
 
-    start_urls = ['https://www.alibaba.com/trade/search?fsb=y&IndexArea=product_en&CatId=&SearchText=chair']
+    #start_urls = ['https://www.alibaba.com/trade/search?fsb=y&IndexArea=product_en&CatId=&SearchText=chair']
+
+    def start_requests(self):
+
+        url = 'https://www.alibaba.com/trade/search?fsb=y&IndexArea=product_en&CatId=&SearchText=chair'
+
+        yield SplashRequest(url)
 
     def parse(self, response):
 
