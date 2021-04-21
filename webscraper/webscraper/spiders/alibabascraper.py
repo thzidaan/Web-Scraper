@@ -9,7 +9,8 @@ class AlibabaScraper(scrapy.Spider):
 
     def start_requests(self):
 
-        url = 'https://www.alibaba.com/trade/search?fsb=y&IndexArea=product_en&CatId=&SearchText=chair'
+        #url = 'https://www.alibaba.com/trade/search?fsb=y&IndexArea=product_en&CatId=&SearchText=chair'
+        url = 'https://www.alibaba.com/products/chair.html?IndexArea=product_en&page=10'
 
         yield SplashRequest(url)
 
