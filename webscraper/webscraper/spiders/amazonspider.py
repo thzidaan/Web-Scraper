@@ -4,7 +4,7 @@ import scrapy
 class AmazonScraper(scrapy.Spider):
     name = 'amazon'
 
-    start_urls = ['https://www.amazon.ca/s?k=key+holder&ref=nb_sb_noss_2']
+    start_urls = ['https://www.amazon.ca/s?k=brush&ref=nb_sb_noss_2']
 
     def parse(self, response):
 
@@ -14,8 +14,10 @@ class AmazonScraper(scrapy.Spider):
             yield {
                 'Name': product.css('span.a-size-base-plus.a-color-base.a-text-normal::text').get(),
                 'Price': product.css('span.a-offscreen::text').get().replace('$', ''),
-                'Link': 'https://www.amazon.ca' + products.css('a.a-link-normal.a-text-normal').attrib['href']
+                'Link': 'https://www.amazon.ca' + product.css('a.a-link-normal.a-text-normal').attrib['href']
             }
 
 
-        #next_page = 
+        next_page = response.css('n/a').attrib['href']
+        if next_page is not None:
+            yield response.follow(next_page,callback=self.parse)
