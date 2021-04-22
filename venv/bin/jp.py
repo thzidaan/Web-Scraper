@@ -1,4 +1,4 @@
-#!/Users/zidaan/Documents/DTFC/Web-Scraper/Web-Scraper-DTFC/venv/bin/python3
+#!/Users/zidaan/Documents/DTFC/Web-Scraper/Web-Scraper/venv/bin/python
 
 import sys
 import json
