@@ -12,7 +12,7 @@ class AmazonScraper(scrapy.Spider):
 
         for product in products:
 
-            if product.css('span.a-size-base-plus.a-color-base.a-text-normal::text').get() is not None:
+            if product.css('span.a-size-base-plus.a-color-base.a-text-normal::text').get() is not None and product.css('span.a-offscreen::text').get() is not None and product.css('a.a-link-normal.a-text-normal').attrib['href'] is not None :
                 yield {
                     'Name': product.css('span.a-size-base-plus.a-color-base.a-text-normal::text').get(),
                     'Price': product.css('span.a-offscreen::text').get().replace('$', ''),
@@ -20,6 +20,8 @@ class AmazonScraper(scrapy.Spider):
                 }
 
 
-        # next_page = response.css('n/a').attrib['href']
-        # if next_page is not None:
-        #     yield response.follow(next_page,callback=self.parse)
+        next_page_div = response.css('li.a-last')
+        if next_page_div is not None:
+            if response.css('li.a-last a::attr(href)').get() is not None:
+                next_page_link = 'https://www.amazon.ca' + response.css('li.a-last a::attr(href)').get()
+                yield response.follow(next_page_link,callback=self.parse)
