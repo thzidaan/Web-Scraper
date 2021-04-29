@@ -1,33 +1,39 @@
-import scrapy
-from scrapy_splash import SplashRequest
+from requests_html import HTMLSession
 
+#Number of Pages cant be found using the links in Aliexpress
+url = 'https://www.aliexpress.com/wholesale?trafficChannel=main&d=y&CatId=0&SearchText=chair&ltype=wholesale&SortType=default&page=1'
 
-class AliexpressScraper(scrapy.Spider):
-    name = 'aliexpress'
+session = HTMLSession()
 
-   
+response = session.get(url)
 
-    def start_request(self):
-        start_urls = ['https://www.aliexpress.com/wholesale?trafficChannel=main&d=y&CatId=0&SearchText=chair&ltype=wholesale&SortType=default&page=1']
+response.html.render(sleep=1)
 
-        for url in start_urls:
-            yield SplashRequest(url, callback=self.parse)
+print(response.status_code)
 
+products = response.html.xpath('//*[@id="root"]/div/div/div[2]/div[2]/div/div[2]/ul', first=True)
 
-    def parse(self, response):
-
-        all_products = response.css('ul.list-items')
-
-        yield {
-            'Name': all_products
-        }         
-
-        yield 
-
-
-
-
-
+for item in products.absolute_links:
+    product_response = session.get(item) #Gets all the links for the products and goes to the url
+    print('\nLink: ' + item)
+    product_response.html.render(sleep=0.2)
+    if(product_response.html.find('h1.product-title-text',first=True)):
+        print('Name: ' + product_response.html.find('h1.product-title-text',first=True).text)
+    else:
+        print('Name: Not Found')
+    if(product_response.html.find('span.product-price-value',first=True)):
+        print('Price:' + product_response.html.find('span.product-price-value',first=True).text)
+    else:
+        print('Price: Not Found')
+    if(product_response.html.find('span.overview-rating-average',first=True)):
+        print('Rating: ' + product_response.html.find('span.overview-rating-average',first=True).text )
+        #print('Description: ' + product_response.html.find('span.product-price-value',first=True).text )
+    else:
+        print('Price: Not Found')
+    if(product_response.html.find('span.product-reviewer-reviews.black-link',first=True)):
+        print('Reviews: ' + product_response.html.find('span.product-reviewer-reviews.black-link',first=True).text + '\n')
+    else:
+        print('Reviews: Not Found\n')
 
 
 
