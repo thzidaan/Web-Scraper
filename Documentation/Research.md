@@ -34,7 +34,7 @@ Scrapy and Splash was neither unable to render pages that had javacript at the v
 
 ### Requests-HTML Library
 
-For the given website [Aliexpress](https://www.aliexpress.com), the second problem first came to light. So no 'spider' was created for aliexpress, Instead the new library uses a different way to approach the problem. 
+For the given website [Aliexpress](https://www.aliexpress.com), the second problem first came to light. So no 'spider' was created for aliexpress per se, Instead the new library uses a different way to approach the problem and we would be still calling it a spider to remove confusions.
 
 The library is able to create a 'fake' session which is then used to render the given website. Then using xpath and find function from the library, the necessary info was extracted from each of the websites. The problem that still persists is that the library is not able to produce all the products in a given page. It is able to scrape in around 28-32 products from site even though it shows the page itself contains around 40 products. 
 
