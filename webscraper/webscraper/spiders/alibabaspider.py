@@ -5,6 +5,8 @@ from scrapy_splash import SplashRequest
 class AlibabaScraper(scrapy.Spider):
     name = 'alibaba'
 
+    user_agent = 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36'
+
     #start_urls = ['https://www.alibaba.com/trade/search?fsb=y&IndexArea=product_en&CatId=&SearchText=chair']
 
 
