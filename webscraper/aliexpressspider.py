@@ -1,7 +1,7 @@
 from requests_html import HTMLSession
 import csv
 
-#Number of Pages cant be found using the links in Aliexpress
+#Number of Pages cant be found using the links in Aliexpress and cant go to next page using the Next button as only :before and :after is there in the 'Next' link
 url = 'https://www.aliexpress.com/wholesale?trafficChannel=main&d=y&CatId=0&SearchText=chair&ltype=wholesale&SortType=default&page=1'
 
 session = HTMLSession()
