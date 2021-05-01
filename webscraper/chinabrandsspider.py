@@ -35,7 +35,9 @@ for item in products.absolute_links:
     else:
         price = notFoundStr
 
+    writer.writerow([link,name,price])
 
+file.close()
 
 
 
