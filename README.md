@@ -10,7 +10,7 @@ A Webscraper that is used to collect data i.e price and description from Amazon,
 git clone https://github.com/thzidaan/Web-Scraper.git
 ```
 
-## Start the Virtual Environemnt
+## Start the Virtual Environment
 
 ```
 cd Web-Scraper
